@@ -86,7 +86,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="（图论初学）单源最短路径：dijkstra"><a href="#（图论初学）单源最短路径：dijkstra" class="headerlink" title="（图论初学）单源最短路径：dijkstra"></a>（图论初学）单源最短路径：dijkstra</h1><p>目标：寻找起始点到目标点的最短路径，做法，每次扫描最短出边，加入路径。。。</p>
+        <p>目标：寻找起始点到目标点的最短路径，做法，每次扫描最短出边，加入路径。。。</p>
 <p>流程如下：1.初始化d[1]=0,然后将其余的dist全部设置为最大<br>                   2.进行n-1次循环，每次都找最小了dist[x],将x标记<br>                   3.扫描该x的全部出边（x,y,z）,if(d[y]&gt;d[x]+z),更新d[y]</p>
 <p><code>#include&lt;algorithm&gt;
 #include&lt;iostream&gt;
