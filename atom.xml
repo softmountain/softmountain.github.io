@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-06T07:32:05.011Z</updated>
+  <updated>2020-04-09T17:21:19.383Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>codeforces round 632 Div.2回顾</title>
+    <link href="http://yoursite.com/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/"/>
+    <id>http://yoursite.com/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/</id>
+    <published>2020-04-09T15:59:20.000Z</published>
+    <updated>2020-04-09T17:21:19.383Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这次的参加人数特别多，大概是新冠肺炎影响居家人数增多吧。题目按照LPT和KEVIN大佬的说法，特别水，但是我还是和之前差不多的结果，看来我的水分拧都拧不干了。。。大哭QAQ&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="codeforces" scheme="http://yoursite.com/tags/codeforces/"/>
+    
+  </entry>
   
   <entry>
     <title>（图论初学）单源最短路径-dijkstra</title>
