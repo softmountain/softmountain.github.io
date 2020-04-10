@@ -16,7 +16,7 @@
     <meta name="description" content="�ڻ����ı�Ե�������X�m" />
     
     <title>
-      Tags - Hexo
+      （图论初学）邻接矩阵和邻接表 - Hexo
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -69,7 +69,7 @@
           Categories
         </a>
         
-        <a href="/tags" class="current">
+        <a href="/tags" class="">
           Tags
         </a>
         
@@ -123,7 +123,7 @@
             Categories
           </a>
           
-          <a href="/tags" class="current">
+          <a href="/tags" class="">
             Tags
           </a>
           
@@ -160,69 +160,113 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <div id="archives">
-    
-        <div class="title">
-            Tags - 图论
-        </div>
-    
-
-
-
-
-    
-    
-    <section class="wrap">
-        <div class="meta">
-            <a href="/archives/2020" >
-                2020
-            </a>
-        </div>
-        <div class="year">
-            
-            <article class="item">
-            <a href="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89bellman-ford%E5%92%8CSPFA/" title="（图论初学）bellman-ford和SPFA">
-                <span>2020/04/10</span>
-                <span>（图论初学）bellman-ford和SPFA</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/" title="（图论初学）邻接矩阵和邻接表">
-                <span>2020/04/10</span>
-                <span>（图论初学）邻接矩阵和邻接表</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-dijkstra/" title="（图论初学）单源最短路径-dijkstra">
-                <span>2020/04/06</span>
-                <span>（图论初学）单源最短路径-dijkstra</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%97%A0%E5%90%91%E8%B7%AF%E5%BE%84-floyed/" title="（图论初学）两点间无向最短路径 floyd">
-                <span>2020/04/06</span>
-                <span>（图论初学）两点间无向最短路径 floyd</span>
-            </a>
-            </article>
-            
-    
-        </div>
-    </section>
+        <article class="post-entry">
+    <div class="header">
       
-<div class="paginator">
-    <span class="page-number current">1</span>
-</div>
-</div>
+      <div class="title">（图论初学）邻接矩阵和邻接表</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/04/10</span>
+        </span>
+        
 
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/ACM">ACM</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/图论">图论</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>对于有向图和无向图（当作有向图来处理），都有两周储存的方式，分别是邻接矩阵或邻接表。</p>
+<a id="more"></a>
+
+<ol>
+<li><p>邻接矩阵：就是二位数组，对于任意a [i] [j],如果i==j,那么a ij的值为零，如果a[i] [j]存在，那么值为w[i] [j],如果不存在，那么值为无穷大。空间复杂度n^2。</p>
+</li>
+<li><p>邻接链表：含有四个数组，分别为长度为n(头节点数量)的head,长度为m(所有路径数量)ver（记录终边），edge（记录边权），next（记录下一条边的位置）。空间复杂度n+m。</p>
+<p>插入和遍历代码：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入有向边(x,y,z)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span>{</span><br><span class="line">	ver[++tot]=y,edge[tot]=z;</span><br><span class="line">    next[tot]=head[x],head[x]=tot;</span><br><span class="line">    <span class="comment">//注意这一步，由于是将前面的head[x]给了后面的next[tot],所以遍历的时候是从后面到前面的</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">//遍历所有x出发的有向边</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=head[x];i;i=next[i]){	</span><br><span class="line">    <span class="comment">//这里面的i如果为0.结束循环</span></span><br><span class="line">	<span class="keyword">int</span> y=ver[i],x=ver[i];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89bellman-ford%E5%92%8CSPFA/">（图论初学）bellman-ford和SPFA</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/">codeforces round 632 Div.2回顾</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://yoursite.com">softmountain</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://yoursite.com/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/">http://yoursite.com/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://yoursite.com">softmountain</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
         <footer>
           <div class="copyright">
             ©2020
