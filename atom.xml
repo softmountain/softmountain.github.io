@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-11T01:32:52.736Z</updated>
+  <updated>2020-04-11T15:44:20.192Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>codeforces edu round 85 A-D</title>
+    <link href="http://yoursite.com/2020/04/11/codeforces-edu-round-85-A-D/"/>
+    <id>http://yoursite.com/2020/04/11/codeforces-edu-round-85-A-D/</id>
+    <published>2020-04-11T13:21:30.000Z</published>
+    <updated>2020-04-11T15:44:20.192Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨晚的比赛并没有参加，但是今天早上参考大佬的代码，花时间把前面相对简单的四题给补了&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="codeforces" scheme="http://yoursite.com/tags/codeforces/"/>
+    
+  </entry>
   
   <entry>
     <title>如何储存路径元素</title>
