@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-11T15:44:20.192Z</updated>
+  <updated>2020-04-16T16:01:48.815Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,82 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>codeforces round 633 div.2&amp;&amp; round 634 div.3回顾</title>
+    <link href="http://yoursite.com/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/"/>
+    <id>http://yoursite.com/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/</id>
+    <published>2020-04-15T14:11:43.000Z</published>
+    <updated>2020-04-16T16:01:48.815Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;codeforces上的比赛一直都很多，索性一次性将有价值的题目全部都放到一起来写了&lt;/p&gt;
+&lt;h2 id=&quot;round-633&quot;&gt;round 633&lt;a class=&quot;post-anchor&quot; href=&quot;#round-6
+      
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="codeforces" scheme="http://yoursite.com/tags/codeforces/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>同余</title>
+    <link href="http://yoursite.com/2020/04/13/%E5%90%8C%E4%BD%99/"/>
+    <id>http://yoursite.com/2020/04/13/%E5%90%8C%E4%BD%99/</id>
+    <published>2020-04-13T03:22:00.000Z</published>
+    <updated>2020-04-16T16:06:33.433Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近一次的周赛中暴露了同余逆元的短板，连板子都不会用，哎，只能加紧补了&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单调栈问题：寻找最大矩形面积</title>
+    <link href="http://yoursite.com/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/"/>
+    <id>http://yoursite.com/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/</id>
+    <published>2020-04-12T03:16:57.000Z</published>
+    <updated>2020-04-16T16:10:31.433Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt; 题意：求若干个相邻矩形并集内部所能找到的最大矩形面积&lt;/p&gt;
+&lt;p&gt;链接：&lt;a href=&quot;http://poj.org/problem?id=2559&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;PO
+      
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>codeforces edu round 85 A-D</title>
     <link href="http://yoursite.com/2020/04/11/codeforces-edu-round-85-A-D/"/>
     <id>http://yoursite.com/2020/04/11/codeforces-edu-round-85-A-D/</id>
     <published>2020-04-11T13:21:30.000Z</published>
-    <updated>2020-04-11T15:44:20.192Z</updated>
+    <updated>2020-04-12T04:53:09.906Z</updated>
     
     <summary type="html">
     

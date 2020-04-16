@@ -30,7 +30,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#A题"><span class="toc-text">A题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B题"><span class="toc-text">B题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C题"><span class="toc-text">C题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D题"><span class="toc-text">D题</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#链接"><span class="toc-text">链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A题"><span class="toc-text">A题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B题"><span class="toc-text">B题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C题"><span class="toc-text">C题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D题"><span class="toc-text">D题</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -208,6 +208,7 @@
     <html><head></head><body><p>昨晚的比赛并没有参加，但是今天早上参考大佬的代码，花时间把前面相对简单的四题给补了</p>
 <a id="more"></a>
 
+<h3 id="链接">链接<a class="post-anchor" href="#链接"></a></h3><p><a href="https://codeforces.com/contest/1334" target="_blank" rel="noopener">https://codeforces.com/contest/1334</a></p>
 <h3 id="A题">A题<a class="post-anchor" href="#A题"></a></h3><p>意思是进行一场游戏，会显示游戏次数和成功次数，由题意可知，游戏次数必定大于成功次数，然后问显示的数据是真是假，用几个条件判断一下就好了</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="built_in">cin</span>>>n;</span><br><span class="line">	<span class="keyword">while</span>(n--){</span><br><span class="line">		<span class="keyword">int</span> flag=<span class="number">1</span>,m1=<span class="number">0</span>,m2=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">cin</span>>>m;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i<=m;i++){</span><br><span class="line">			<span class="built_in">cin</span>>>a[i]>>b[i];</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i<=m;i++){</span><br><span class="line">			<span class="keyword">if</span>(m1>a[i]||m2>b[i]||a[i]<b[i]||b[i]-m2>a[i]-m1){</span><br><span class="line">				flag=<span class="number">0</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">			m1=a[i],m2=b[i];	</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span>(flag)</span><br><span class="line">		<span class="built_in">cout</span><<<span class="string">"YES"</span><<<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">cout</span><<<span class="string">"NO"</span><<<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
@@ -255,6 +256,8 @@
   
   <div class="post-guide">
     <div class="item left">
+        
+          <a href="/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/">单调栈问题：寻找最大矩形面积</a>
         
     </div>
     <div class="item right">

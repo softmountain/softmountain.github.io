@@ -16,7 +16,7 @@
     <meta name="description" content="�ڻ����ı�Ե�������X�m" />
     
     <title>
-          Hexo
+      单调栈问题：寻找最大矩形面积 - Hexo
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -160,250 +160,107 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        
-<div class="posts">
-  <ul>
-     
-
-    
-
-  <li class="item">
-
+        <article class="post-entry">
+    <div class="header">
       
-
-      
-      <div class="describe">
-        <div class="title">
-          <a href="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/">（图论初学）邻接矩阵和邻接表</a>
-        </div>
-        <div class="date">
+      <div class="title">单调栈问题：寻找最大矩形面积</div>
+      <div class="meta">
+        <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>20/04/10</span>
-        </div>
+          <span>2020/04/12</span>
+        </span>
         
-        <div class="excerpt post-wrap"><p>对于有向图和无向图（当作有向图来处理），都有两周储存的方式，分别是邻接矩阵或邻接表。</p></div>
-        
-        <div class="meta">
-          <div class="l">
-            <div class="warp">
-              
-              <span class="iconfont icon-folder"></span>
-              <span class="desp">
-                 
-                <a href="/categories/ACM">ACM</a>
-                 
-              </span>
-              
-            </div>
 
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/ACM">ACM</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/数据结构">数据结构</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p> 题意：求若干个相邻矩形并集内部所能找到的最大矩形面积</p>
+<p>链接：<a href="http://poj.org/problem?id=2559" target="_blank" rel="noopener">POJ2559</a></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a[n+<span class="number">1</span>]=p=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i<=n+<span class="number">1</span>;i++){</span><br><span class="line">    <span class="keyword">if</span>(a[i]>s[p])</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">int</span> <span class="built_in">width</span>=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(s[p]>a[i]){		</span><br><span class="line">			<span class="built_in">width</span>+=w[p];</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">width</span>*s[p]);</span><br><span class="line">            p--;</span><br><span class="line">        }</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="built_in">width</span>+<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
             
-            <div class="warp">
-              <span class="iconfont icon-tag1"></span>
-              <span class="desp">
-                 
-                <a href="/tags/图论">图论</a>
-                 
-              </span>
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
             </div>
             
-            <div class="warp">
-              <div class="share" data-url="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/">
-                <span class="iconfont icon-share"></span>
-              </div>
-              <div class="desp share" data-url="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/">
-                <a href="#">Share</a>
-              </div>
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
             </div>
-          </div>
-          <div class="r">
-            <a href="/2020/04/10/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%92%8C%E9%82%BB%E6%8E%A5%E8%A1%A8/">Read More</a>
-          </div>
+            
         </div>
       </div>
-    </li>
-     
-
-    
-
-  <li class="item">
-
-      
-
-      
-      <div class="describe">
-        <div class="title">
-          <a href="/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/">codeforces round 632 Div.2回顾</a>
-        </div>
-        <div class="date">
-          <span class="iconfont icon-time-circle"></span>
-          <span>20/04/09</span>
-        </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
         
-        <div class="excerpt post-wrap"><p>这次的参加人数特别多，大概是新冠肺炎影响居家人数增多吧。题目按照LPT和KEVIN大佬的说法，特别水，但是我还是和之前差不多的结果，看来我的水分拧都拧不干了。。。大哭QAQ</p></div>
+          <a href="/2020/04/13/%E5%90%8C%E4%BD%99/">同余</a>
         
-        <div class="meta">
-          <div class="l">
-            <div class="warp">
-              
-              <span class="iconfont icon-folder"></span>
-              <span class="desp">
-                 
-                <a href="/categories/ACM">ACM</a>
-                 
-              </span>
-              
-            </div>
-
-            
-            <div class="warp">
-              <span class="iconfont icon-tag1"></span>
-              <span class="desp">
-                 
-                <a href="/tags/codeforces">codeforces</a>
-                 
-              </span>
-            </div>
-            
-            <div class="warp">
-              <div class="share" data-url="/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/">
-                <span class="iconfont icon-share"></span>
-              </div>
-              <div class="desp share" data-url="/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/">
-                <a href="#">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="r">
-            <a href="/2020/04/09/codeforces-round-632-Div-2%E5%9B%9E%E9%A1%BE/">Read More</a>
-          </div>
-        </div>
-      </div>
-    </li>
-     
-
-    
-
-  <li class="item">
-
-      
-
-      
-      <div class="describe">
-        <div class="title">
-          <a href="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-dijkstra/">（图论初学）单源最短路径-dijkstra</a>
-        </div>
-        <div class="date">
-          <span class="iconfont icon-time-circle"></span>
-          <span>20/04/06</span>
-        </div>
+    </div>
+    <div class="item right">
         
-        <div class="excerpt post-wrap"><p>目标：寻找起始点到目标点的最短路径，做法，每次扫描最短出边，加入路径。。。</p></div>
+          <a href="/2020/04/11/codeforces-edu-round-85-A-D/">codeforces edu round 85 A-D</a>
         
-        <div class="meta">
-          <div class="l">
-            <div class="warp">
-              
-              <span class="iconfont icon-folder"></span>
-              <span class="desp">
-                 
-                <a href="/categories/ACM">ACM</a>
-                 
-              </span>
-              
-            </div>
+    </div>
+  </div>
 
-            
-            <div class="warp">
-              <span class="iconfont icon-tag1"></span>
-              <span class="desp">
-                 
-                <a href="/tags/图论">图论</a>
-                 
-              </span>
-            </div>
-            
-            <div class="warp">
-              <div class="share" data-url="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-dijkstra/">
-                <span class="iconfont icon-share"></span>
-              </div>
-              <div class="desp share" data-url="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-dijkstra/">
-                <a href="#">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="r">
-            <a href="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-dijkstra/">Read More</a>
-          </div>
-        </div>
-      </div>
-    </li>
-     
+  
 
-    
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://yoursite.com">softmountain</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://yoursite.com/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/">http://yoursite.com/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://yoursite.com">softmountain</a>的博客，转载请注明出处！
+    </div>
+  </div>
 
-  <li class="item">
+  <div id="comment"></div>
 
-      
-
-      
-      <div class="describe">
-        <div class="title">
-          <a href="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%97%A0%E5%90%91%E8%B7%AF%E5%BE%84-floyed/">（图论初学）两点间无向最短路径 floyd</a>
-        </div>
-        <div class="date">
-          <span class="iconfont icon-time-circle"></span>
-          <span>20/04/06</span>
-        </div>
-        
-        <div class="excerpt post-wrap"><p>floyd主要是使用了dp的思想，最主要的疑惑恐怕是i，j，k三个变量的位置为何不可变化</p>
-<p>如果想要了解内部缘由不妨移步：<a href="https://www.zhihu.com/question/30955032/answer/68834307" target="_blank" rel="noopener">为什么k要放在最外层</a></p></div>
-        
-        <div class="meta">
-          <div class="l">
-            <div class="warp">
-              
-              <span class="iconfont icon-folder"></span>
-              <span class="desp">
-                 
-                <a href="/categories/ACM">ACM</a>
-                 
-              </span>
-              
-            </div>
-
-            
-            <div class="warp">
-              <span class="iconfont icon-tag1"></span>
-              <span class="desp">
-                 
-                <a href="/tags/图论">图论</a>
-                 
-              </span>
-            </div>
-            
-            <div class="warp">
-              <div class="share" data-url="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%97%A0%E5%90%91%E8%B7%AF%E5%BE%84-floyed/">
-                <span class="iconfont icon-share"></span>
-              </div>
-              <div class="desp share" data-url="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%97%A0%E5%90%91%E8%B7%AF%E5%BE%84-floyed/">
-                <a href="#">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="r">
-            <a href="/2020/04/06/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%97%A0%E5%90%91%E8%B7%AF%E5%BE%84-floyed/">Read More</a>
-          </div>
-        </div>
-      </div>
-    </li>
-    
-  </ul>
-</div>
-
-<div class="paginator">
-  <a class="page-number" href="/">1</a><span class="page-number current">2</span>
-</div>
-
+  
+  
+</article>
         <footer>
           <div class="copyright">
             ©2020
