@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+
+<html lang="zh">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="�ڻ����ı�Ե�������X�m" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     Hexo
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Hexo</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article id="post-基本数据结构-KMP模式匹配" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"
+    >基本数据结构 KMP模式匹配</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/" class="article-date">
+  <time datetime="2020-04-17T07:29:44.000Z" itemprop="datePublished">2020-04-17</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>KMP匹配是判断两个线性表之间是否存在子母串关系的算法，并且能够定位到子串所处的位置</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1 .首先对小的字符串A进行自我”匹配”，设置next数组，其中next[i]表示“A中以a[i]结尾的非前缀子串”与”A的前缀”所能匹配到的最大长度</p>
+<p>公式： next[i]=max{j},其中j&lt;i并且A[i-j+1 ~ i]==A[1 ~ j]</p>
+<p>特别的：当不存在这样的 j 时，令next[i]=0</p>
+<p>2 .对字符串A和B进行匹配，求出一个数组f，其中f[i]表示“B中以i结尾的字串”与”A的前缀”能够匹配到的最大长度</p>
+<p>公式： f[i]=max{j},其中j&lt;i并且B[i-j+1 ~i]==A[1 ~ j]</p>
+<p>当j的长度超过了n时，应该把j=next[j];</p>
+<h3 id="引理"><a href="#引理" class="headerlink" title="引理"></a>引理</h3><p>对于j&lt;i,则j是next[i]的一个候选项，则小于j的next[i]的最大候选项是next[j],这是一个套娃的关系，直到满足条件或者next[j]==0</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//next数组的求法</span></span><br><span class="line">next[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">    <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;a[i]!=a[j+<span class="number">1</span>]) j=next[j];</span><br><span class="line">    <span class="comment">//找到符合条件的j,或者j==0;</span></span><br><span class="line">    <span class="keyword">if</span>(a[i]==a[j+<span class="number">1</span>]) j++; </span><br><span class="line">    <span class="comment">//如果符合条件，加上末尾的元素</span></span><br><span class="line">    next[i]=j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//f数组的求法（大同小异）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)&#123;</span><br><span class="line">    <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;(j==n||b[i]!=a[j+<span class="number">1</span>])) j=next[j];</span><br><span class="line">    <span class="keyword">if</span>(b[i]==a[j+<span class="number">1</span>]) j++;</span><br><span class="line">	f[i]=j;</span><br><span class="line">    <span class="comment">//当f[i]==n的时候，说明子串就出现了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>链接：<a href="http://poj.org/problem?id=2559" target="_blank" rel="noopener">POJ1961</a></p>
+<p>题意：求循环元，首先我们设s[1~i]拥有长度为len的循环元</p>
+<p>那么len必定满足以下条件：</p>
+<p>len|i &amp;&amp; s[len+1<del>i]==s[1</del>i-len]</p>
+<p>而最小循环节则满足</p>
+<p>s[len] (最小循环节)=next[i]</p>
+<p>综上，得到代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calc_next</span><span class="params">()</span></span>&#123;</span><br><span class="line">    next[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;j=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;a[j+<span class="number">1</span>]!=a[i]) j=next[j];</span><br><span class="line">        <span class="keyword">if</span>(a[j+<span class="number">1</span>]==a[i]) j++;</span><br><span class="line">        next[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,a+<span class="number">1</span>);</span><br><span class="line">        calc_next();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"Test case"</span>&lt;&lt;++T&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i%(i-next[i])==<span class="number">0</span>&amp;&amp;i/(i-next[i])&gt;<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;i/(i-next[i])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-CF每日一题-四月" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/17/CF%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%9B%9B%E6%9C%88/"
+    >CF每日一题 四月</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/17/CF%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%9B%9B%E6%9C%88/" class="article-date">
+  <time datetime="2020-04-17T07:27:37.000Z" itemprop="datePublished">2020-04-17</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-codeforces-round-633-div-2-round-634-div-3 round 635 div.2回顾" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/"
+    >codeforces round 633 div.2&amp;&amp; round 634 div.3回顾</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/" class="article-date">
+  <time datetime="2020-04-15T14:11:43.000Z" itemprop="datePublished">2020-04-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>codeforces上的比赛一直都很多，索性一次性将有价值的题目全部都放到一起来写了</p>
+<h2 id="round-633"><a href="#round-633" class="headerlink" title="round 633"></a>round 633</h2><h3 id="D题"><a href="#D题" class="headerlink" title="D题"></a>D题</h3><p>题意：给定指定的n个点，n-1条无向路（也就是说没有成环的可能），可以给路径随机分配正权值，从一个叶节点走到另外的叶节点路途中，所途径权值异或之和应该为零，问权值数量最少为多少，最多为多少</p>
+<p>分析：首先我们先判断最小值的情况，我们可以发现，如果存在有两个节点之间的边数为奇数，那么权值的种类最小数必定为三，然后再去判断最大值的情况，两个或者两个以上叶节点同时连在了一个点上的情况中，这几个叶结点的权值边应该全部相同，所以只需要保留一个就可以了，把删掉的节点数用一个数字存起来，最大值就是 n-1-该数字</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> t,n,m,ans=<span class="number">0</span>,fl=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v[<span class="number">100005</span>],one;</span><br><span class="line"><span class="keyword">int</span> qi=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> aa=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(ans) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(y!=<span class="number">-1</span>&amp;&amp;v[x].<span class="built_in">size</span>()==<span class="number">1</span>)&#123;	<span class="comment">//从所有的叶节点出发，到其他的的叶节点，判断路径的奇偶</span></span><br><span class="line">        <span class="keyword">if</span>(z%<span class="number">2</span>) ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    rep(i,<span class="number">0</span>,v[x].<span class="built_in">size</span>()<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(v[x][i]==y) <span class="keyword">continue</span>;</span><br><span class="line">        dfs(v[x][i],x,z+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">int</span> minn=<span class="number">0</span>,maxn=n<span class="number">-1</span>;</span><br><span class="line">    rep(i,<span class="number">1</span>,n<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> a,b;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">        v[a].push_back(b);</span><br><span class="line">        v[b].push_back(a);</span><br><span class="line">    &#125;</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(v[i].<span class="built_in">size</span>()==<span class="number">1</span>&amp;&amp;qi==<span class="number">0</span>)&#123;</span><br><span class="line">            qi=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        rep(j,<span class="number">0</span>,v[i].<span class="built_in">size</span>()<span class="number">-1</span>)&#123;			<span class="comment">//删除多余叶节点</span></span><br><span class="line">            <span class="keyword">if</span>(v[v[i][j]].<span class="built_in">size</span>()==<span class="number">1</span>) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt&gt;=<span class="number">2</span>) fl+=cnt<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(qi,<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(ans==<span class="number">0</span>) minn=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> minn=<span class="number">3</span>;</span><br><span class="line">    maxn-=fl;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,minn,maxn);</span><br></pre></td></tr></table></figure>
+
+<h2 id="round-634"><a href="#round-634" class="headerlink" title="round 634"></a>round 634</h2><h3 id="E1题"><a href="#E1题" class="headerlink" title="E1题"></a>E1题</h3><p>题意：给定一个数组，问在不改变顺序的情况下，通过删减数组中元素，使得数组变成’ABA’型回文串是否可能，如果可能，请输出最大的回文串的长度</p>
+<p>分析：dp题，用数组从左往右遍历，用a[i] [j]表示当前位置 j 情况下字符 i 的数量，然后再用从每一个位置开始，</p>
+<p>以当前位置为左端，设置右端，再遍历26个字母的存在，使得</p>
+<p>maxin=max(maxin,a[i] [r+1]-a[i] [l]);</p>
+<p>maxout=max(maxout,min(a[i] [l],a[i] [n]-a[i] [r+1])*2);</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sz(a) int((a).size())</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> forn(i, n) for (int i = 0; i &lt; int(n); ++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fore(i, l, r) for (int i = int(l); i &lt; int(r); ++i)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--) &#123;</span><br><span class="line">		<span class="keyword">int</span> n;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> &amp;it : a) <span class="built_in">cin</span> &gt;&gt; it;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">cnt</span><span class="params">(<span class="number">26</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>))</span></span>;</span><br><span class="line">		forn(i, n) &#123;</span><br><span class="line">			forn(j, <span class="number">26</span>) cnt[j][i + <span class="number">1</span>] = cnt[j][i];</span><br><span class="line">			++cnt[a[i] - <span class="number">1</span>][i + <span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">		forn(i, <span class="number">26</span>) ans = <span class="built_in">max</span>(ans, cnt[i][n - <span class="number">1</span>]);</span><br><span class="line">		forn(l, n) fore(r, l, n) &#123;</span><br><span class="line">			<span class="keyword">int</span> cntin = <span class="number">0</span>, cntout = <span class="number">0</span>;</span><br><span class="line">			forn(el, <span class="number">26</span>) &#123;</span><br><span class="line">				cntin = <span class="built_in">max</span>(cntin, cnt[el][r + <span class="number">1</span>] - cnt[el][l]);</span><br><span class="line">				cntout = <span class="built_in">max</span>(cntout, <span class="built_in">min</span>(cnt[el][l], cnt[el][n] - cnt[el][r + <span class="number">1</span>]) * <span class="number">2</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, cntin + cntout);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-同余" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/13/%E5%90%8C%E4%BD%99/"
+    >同余</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/13/%E5%90%8C%E4%BD%99/" class="article-date">
+  <time datetime="2020-04-13T03:22:00.000Z" itemprop="datePublished">2020-04-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>最近一次的周赛中暴露了同余逆元的短板，连板子都不会用，哎，只能加紧补了</p>
+      
+      <a class="article-more-link" href="/2020/04/13/%E5%90%8C%E4%BD%99/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-单调栈问题：寻找最大矩形面积" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/"
+    >单调栈问题：寻找最大矩形面积</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/" class="article-date">
+  <time datetime="2020-04-12T03:16:57.000Z" itemprop="datePublished">2020-04-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p> 题意：求若干个相邻矩形并集内部所能找到的最大矩形面积</p>
+<p>链接：<a href="http://poj.org/problem?id=2559" target="_blank" rel="noopener">POJ2559</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a[n+<span class="number">1</span>]=p=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(a[i]&gt;s[p])</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> <span class="built_in">width</span>=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(s[p]&gt;a[i])&#123;		</span><br><span class="line">			<span class="built_in">width</span>+=w[p];</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">width</span>*s[p]);</span><br><span class="line">            p--;</span><br><span class="line">        &#125;</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="built_in">width</span>+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-codeforces-edu-round-85-A-D" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/11/codeforces-edu-round-85-A-D/"
+    >codeforces edu round 85 A-D</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/11/codeforces-edu-round-85-A-D/" class="article-date">
+  <time datetime="2020-04-11T13:21:30.000Z" itemprop="datePublished">2020-04-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>昨晚的比赛并没有参加，但是今天早上参考大佬的代码，花时间把前面相对简单的四题给补了</p>
+      
+      <a class="article-more-link" href="/2020/04/11/codeforces-edu-round-85-A-D/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> softmountain
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E8%AE%B0%E5%BD%95/">记录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+  </div>
+</body>
+
+</html>
