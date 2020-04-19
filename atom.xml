@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-17T09:04:55.093Z</updated>
+  <updated>2020-04-19T16:32:46.714Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,15 +21,11 @@
     <link href="http://yoursite.com/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
     <id>http://yoursite.com/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/</id>
     <published>2020-04-17T07:29:44.000Z</published>
-    <updated>2020-04-17T09:04:55.093Z</updated>
+    <updated>2020-04-19T16:32:46.714Z</updated>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;KMP匹配是判断两个线性表之间是否存在子母串关系的算法，并且能够定位到子串所处的位置&lt;/p&gt;
-&lt;h3 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h3&gt;&lt;p&gt;1 .首先对小的字符串A进行自我”匹配”
-      
+      &lt;p&gt;KMP匹配是判断两个线性表之间是否存在子母串关系的算法，并且能够定位到子串所处的位置&lt;/p&gt;
     
     </summary>
     
@@ -65,15 +61,11 @@
     <link href="http://yoursite.com/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/"/>
     <id>http://yoursite.com/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/</id>
     <published>2020-04-15T14:11:43.000Z</published>
-    <updated>2020-04-16T16:01:48.815Z</updated>
+    <updated>2020-04-19T16:33:18.797Z</updated>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;codeforces上的比赛一直都很多，索性一次性将有价值的题目全部都放到一起来写了&lt;/p&gt;
-&lt;h2 id=&quot;round-633&quot;&gt;&lt;a href=&quot;#round-633&quot; class=&quot;headerlink&quot; title=&quot;round 633&quot;&gt;&lt;/a&gt;round 633
-      
+      &lt;p&gt;codeforces上的比赛一直都很多，索性一次性将有价值的题目全部都放到一起来写了&lt;/p&gt;
     
     </summary>
     
@@ -111,16 +103,11 @@
     <link href="http://yoursite.com/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/"/>
     <id>http://yoursite.com/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/</id>
     <published>2020-04-12T03:16:57.000Z</published>
-    <updated>2020-04-17T09:05:43.680Z</updated>
+    <updated>2020-04-19T16:32:41.023Z</updated>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt; 题意：求若干个相邻矩形并集内部所能找到的最大矩形面积&lt;/p&gt;
-&lt;p&gt;链接：&lt;a href=&quot;http://poj.org/problem?id=2559&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;POJ2559&lt;/a&gt;&lt;/p&gt;
-&lt;figure cla
-      
+      &lt;p&gt; 题意：求若干个相邻矩形并集内部所能找到的最大矩形面积&lt;/p&gt;
     
     </summary>
     
@@ -158,13 +145,15 @@
     <link href="http://yoursite.com/2020/04/10/%E5%A6%82%E4%BD%95%E5%82%A8%E5%AD%98%E8%B7%AF%E5%BE%84%E5%85%83%E7%B4%A0/"/>
     <id>http://yoursite.com/2020/04/10/%E5%A6%82%E4%BD%95%E5%82%A8%E5%AD%98%E8%B7%AF%E5%BE%84%E5%85%83%E7%B4%A0/</id>
     <published>2020-04-10T15:01:45.000Z</published>
-    <updated>2020-04-11T01:32:52.736Z</updated>
+    <updated>2020-04-19T16:33:07.627Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;最短路路径&quot;&gt;&lt;a href=&quot;#最短路路径&quot; class=&quot;headerlink&quot; title=&quot;最短路路径&quot;&gt;&lt;/a&gt;最短路路径&lt;/h1&gt;&lt;p&gt;题目链接：&lt;a href=&quot;http://poj.org/problem?id=1734&quot; target=&quot;_bla
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;最短路路径&quot;&gt;&lt;a href=&quot;#最短路路径&quot; class=&quot;headerlink&quot; title=&quot;最短路路径&quot;&gt;&lt;/a&gt;最短路路径&lt;/h1&gt;&lt;p&gt;题目链接：&lt;a href=&quot;http://poj.org/problem?id
       
     
     </summary>
