@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>沉思之地</title>
+  <title>收集瓶</title>
   <icon>https://www.gravatar.com/avatar/b1d41d6d68d9e9e42d53a6759de71815</icon>
   <subtitle>虽说人类一思考,上帝就发笑,但是人类不思考,上帝连发笑都不屑</subtitle>
   <link href="/atom.xml" rel="self"/>
