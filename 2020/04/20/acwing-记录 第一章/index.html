@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="HUT/ACMer" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    acwing 记录 第一章 |  收集瓶
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/images/logo.jpeg" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="收集瓶" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-acwing-记录 第一章" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  acwing 记录 第一章
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/20/acwing-%E8%AE%B0%E5%BD%95%20%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="article-date">
+  <time datetime="2020-04-20T09:24:59.000Z" itemprop="datePublished">2020-04-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>这里是acwing上面dp专题的价值题的收集，算是dp专题吧</p>
+<a id="more"></a>
+
+<h2 id="275-传纸条"><a href="#275-传纸条" class="headerlink" title="275.传纸条"></a>275.传纸条</h2><h3 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h3><p><a href="https://www.acwing.com/solution/acwing/content/2851/" target="_blank" rel="noopener">https://www.acwing.com/solution/acwing/content/2851/</a></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>这道题是一道线性dp，求出不重合的两条路线的权值之和，我们可以设想为两个人在互不重合的路线上同时出发同时到达，设他们所处的坐标横纵之和为m+n，第一位的横坐标为i,第二位为j,对应的纵坐标就是m+n-i,m+n-j，由此我们可以确定状态f[k] [i] [j]，即坐标值和为k的时候两个人的权值之和的最大值，那么能够走到这一步有四种可能，分别为右右，右下，下右，下下，并且我们注意到，如果i==j,那么说明此时两个人的走到了同一位置，此时由于此种情况不可能存在，我们之间舍去即可</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>暴力枚举加部分贪心，通过枚举左端的人的位置，由于右端的人不可能再从更左的地方出发（可能出发的情况早已经储存在了之前的状态之中），那么我们可得到四重循环的结果f[n-1] [m] [n-1] [m]，这样子有一个好处，可以避免对两人坐标相同时的讨论，但是复杂度仍然很高，无论是空间还是时间都是O(n^4)</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> v[<span class="number">55</span>][<span class="number">55</span>],f[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br><span class="line"><span class="comment">// (i,j) 是第一条路径坐标 (k,l) 是第二条</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;v[i][j]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> l=j+<span class="number">1</span>;l&lt;=m;l++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">int</span> w1=f[i<span class="number">-1</span>][j][k][l<span class="number">-1</span>],w2=f[i<span class="number">-1</span>][j][k<span class="number">-1</span>][l];</span><br><span class="line">                    <span class="keyword">int</span> w3=f[i][j<span class="number">-1</span>][k][l<span class="number">-1</span>],w4=f[i][j<span class="number">-1</span>][k<span class="number">-1</span>][l];</span><br><span class="line">                    f[i][j][k][l]=<span class="built_in">max</span>(w1,<span class="built_in">max</span>(w2,<span class="built_in">max</span>(w3,w4)))+v[i][j]+v[k][l];</span><br><span class="line">                    <span class="comment">//我们用贪心思想可得两条路径肯定不相交 (能取数就取数)</span></span><br><span class="line">                    <span class="comment">//那么令 l=(j+1,m) 即满足了此条件 (保证了第二条路线一定在第一条路线下面) </span></span><br><span class="line">                    <span class="comment">//不用判重因为不会重两条路径不相交 </span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,f[n][m<span class="number">-1</span>][n<span class="number">-1</span>][m]); </span><br><span class="line">    <span class="comment">//dp 是达不到 (n,m) 的,但 (n,m) 等价于 (n-1,m),(n,m-1) (因为 v(n,m)==0)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>就是设定总计的步数为k,两人坐标分别为(i,k-i) (j,k-j)</p>
+<p>从而得到状态f[k] [i] [j]</p>
+<p>当i != j时，此时两者处在不同的位置，那么就可以通过四种达到该状态的方式来得出f[k] [i] [j]的值，如果i==j，直接不做讨论，跳过完事，除非时i==j==0||n的情况</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">55</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> g[N][N];</span><br><span class="line"><span class="keyword">int</span> f[N * <span class="number">2</span>][N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j ++ )</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;g[i][j]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">2</span>; k &lt;= n + m; k ++ )</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">max</span>(<span class="number">1</span>, k - m); i &lt;<span class="built_in">min</span>(n+<span class="number">1</span>,k); i ++ )</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="built_in">max</span>(<span class="number">1</span>, k - m); j &lt;<span class="built_in">min</span>(n+<span class="number">1</span>,k); j ++ )</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">0</span>; a &lt;= <span class="number">1</span>; a ++ )</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> b = <span class="number">0</span>; b &lt;= <span class="number">1</span>; b ++ )</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">int</span> t = g[i][k - i];</span><br><span class="line">                        <span class="keyword">if</span> (i != j || k == <span class="number">2</span> || k == n + m)</span><br><span class="line">                        &#123;</span><br><span class="line">                            t += g[j][k - j];</span><br><span class="line">                            f[k][i][j] = <span class="built_in">max</span>(f[k][i][j], f[k - <span class="number">1</span>][i - a][j - b] + t);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, f[n + m][n][n]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>方法一规避了对两者位置相同的时的判断，代码简化且方式粗暴，但是由于没有对步长的限制，导致了对时间和空间上的极大浪费，第二种方式通过对步长的限制，使得计算降低了一个维度</p>
+<h2 id="1014-登山"><a href="#1014-登山" class="headerlink" title="1014.登山"></a>1014.登山</h2><h3 id="链接：-1"><a href="#链接：-1" class="headerlink" title="链接："></a>链接：</h3><p><a href="https://www.acwing.com/problem/content/description/1016/" target="_blank" rel="noopener">https://www.acwing.com/problem/content/description/1016/</a></p>
+<h3 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h3><p>这是一道经典的LIS题目，但是我们可以用双dp数组的思想来做，降低代码复杂度</p>
+<p>方法：设置两个数组dp_high,dp_sum，前者dp_high[i]表示序列为i的元素结尾的序列的最长上升子序列长度，后者dp_sum[i]表示以i结尾的序列的最长先上升在下降序列长度</p>
+<p>有状态转移方程：对任意j&lt;i</p>
+<p>if(a[j]&lt;a[i]) dp_high[i]=max(dp_high[i],dp_high[j]+1)</p>
+<p>else if(a[j]&gt;a[i]) </p>
+<p>dp_sum[i]=max(dp_sum[i],max(dp_sum[j]+1,dp_high[j]+1))</p>
+<p>时间复杂度没有明显降低，但是提供了一种嵌套迭代的思想</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; h[i];</span><br><span class="line"></span><br><span class="line">    dp_inc[i] = <span class="number">1</span>, dp_dec[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(h[j] &lt; h[i])</span><br><span class="line">            dp_inc[i] = <span class="built_in">max</span>(dp_inc[i], dp_inc[j]+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(h[j] &gt; h[i])</span><br><span class="line">            dp_dec[i] = <span class="built_in">max</span>(dp_dec[i], <span class="built_in">max</span>(dp_inc[j]+<span class="number">1</span>, dp_dec[j]+<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res = <span class="built_in">max</span>(res, <span class="built_in">max</span>(dp_inc[i], dp_dec[i]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1011-登山"><a href="#1011-登山" class="headerlink" title="1011.登山"></a>1011.登山</h2><h3 id="链接：-2"><a href="#链接：-2" class="headerlink" title="链接："></a>链接：</h3><p><a href="https://www.acwing.com/problem/content/1012/" target="_blank" rel="noopener">https://www.acwing.com/problem/content/1012/</a></p>
+<h3 id="分析：-1"><a href="#分析：-1" class="headerlink" title="分析："></a>分析：</h3><p>求最大上升子序列和最长不降子序列的长度，可以使用lower_bound和upper_bound两个函数，两者正常情况下的都是对升序列使用，如果需对降序列使用必须使用greater<type>()或者重载模型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">对降序序列使用</span><br><span class="line">    lower_bound(f,f+n,a,greater&lt;<span class="keyword">int</span>&gt;())求出第一个小于或等于a的f[n]的位置，没有返回<span class="built_in">end</span>;</span><br><span class="line">	upper_bound返回的是不能等于的数</span><br><span class="line">对结构体使用</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.value1 != b.value1) <span class="keyword">return</span> a.value1 &lt; b.value1;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> a.value2 &lt; b.value2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1005</span>;</span><br><span class="line"><span class="keyword">int</span>  f[N],a,g[N]; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> pos1,pos2,cnt,len;</span><br><span class="line">	len=cnt=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a) &#123;</span><br><span class="line">		pos1=upper_bound(f,f+len,a,greater&lt;<span class="keyword">int</span>&gt;())-f;</span><br><span class="line">		<span class="keyword">if</span>(pos1==len) f[len++]=a;</span><br><span class="line">		<span class="keyword">else</span> f[pos1]=a;</span><br><span class="line"> 		<span class="comment">//为什么包含等于非严格递增或递减的时候我们反而要用upper呢，这是因为这样子才能做到只有更小的节点才能更新len的长度</span></span><br><span class="line">		pos2=lower_bound(g,g+cnt,a)-g;</span><br><span class="line">		<span class="keyword">if</span>(pos2==cnt) g[cnt++]=a;</span><br><span class="line">		<span class="keyword">else</span> g[pos2]=a;</span><br><span class="line">        <span class="comment">//这里是严格递增的，所以用lower_bound</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;len&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;cnt&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="187-导弹防御系统"><a href="#187-导弹防御系统" class="headerlink" title="187.导弹防御系统"></a>187.导弹防御系统</h2><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>这是一道df题目，虽然披着LIS的皮，对于每一个点，我们都有两种选择：放到上升子序列集合或者下降子序列集合之中</p>
+<p><a href="https://www.acwing.com/solution/AcWing/content/4010/" target="_blank" rel="noopener">这个分析的太好了</a></p>
+<p>注意事项：</p>
+<ol>
+<li>可以使用<code>while(!dfs(depth,0,0,0))depth++</code>,这里的代码使用的是当dfs首次满足条件t==n（所有的点全部都集合之中）且集合数之和小于总数之和时对应的集合数之和的最小值，同样可以满足要求</li>
+<li>必须要回溯，<code>temp=h[i](d[i])...h[i](d[i])=temp</code>否则会对之后的结果造成影响</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> d, <span class="keyword">int</span> t)</span>  <span class="comment">//u表示上升的系统个数，d表示下降的系统个数,t表示第t个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(u + d &gt;= ans) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(t ==  n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(u + d &lt; ans)ans = u + d;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= u; i++)  <span class="comment">//找到第一个末尾数小于a[t]的导弹系统</span></span><br><span class="line">        <span class="keyword">if</span>(up[i] &lt; a[t])<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> temp = up[i];</span><br><span class="line">    up[i] = a[t];<span class="comment">//添加到该导弹系统中</span></span><br><span class="line">    dfs(<span class="built_in">max</span>(u, i), d, t + <span class="number">1</span>);</span><br><span class="line">    up[i] = temp;  <span class="comment">//恢复现场</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= d; i++)<span class="comment">//找到第一个末尾数大于a[t]的导弹系统</span></span><br><span class="line">        <span class="keyword">if</span>(down[i] &gt; a[t])<span class="keyword">break</span>;</span><br><span class="line">    temp = down[i];</span><br><span class="line">    down[i] = a[t];<span class="comment">//添加到该导弹系统中去</span></span><br><span class="line">    dfs(u, <span class="built_in">max</span>(d, i), t + <span class="number">1</span>);</span><br><span class="line">    down[i] = temp;<span class="comment">//恢复现场</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) != EOF &amp;&amp; n != <span class="number">0</span>)&#123;</span><br><span class="line">        ans = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">        dfs(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="272-最大公共子序列"><a href="#272-最大公共子序列" class="headerlink" title="272.最大公共子序列"></a>272.最大公共子序列</h2><h3 id="链接-1"><a href="#链接-1" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.acwing.com/problem/content/274/" target="_blank" rel="noopener">https://www.acwing.com/problem/content/274/</a></p>
+<h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h3><p>状态分析：</p>
+<p>对于Ai,Bj,有</p>
+<p>当Ai != Bj时，有f[i,j]==f[i-1,j];</p>
+<p>当Ai == Bj时，有F[i,j]=max(0&lt;=k&lt;j,Bk&lt;Bj){f[i-1,k]}+1</p>
+<p>可以使用三重循环来得到解，但其实应该有优化，我们思考k，实际上每一次当第二层移动时，a[i]是不动的，对于b[j]，如果它小于当前a[i],那么他的上一层a[i-1] [j]就有可能变成a[i] [j]的父节点，我们用maxv将当前a[i] [j]对应的最大的a[i-1] [k]用一个数字存起来就行了</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">int</span> maxv=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">//初始化为1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">        <span class="keyword">if</span>(a[i]==a[j])	f[i][j]=maxv+<span class="number">1</span>;</span><br><span class="line">    	<span class="keyword">else</span> f[i][j]=f[i][j];</span><br><span class="line">    	<span class="keyword">if</span>(a[i]&gt;a[j])</span><br><span class="line">            maxv=maxv(maxv,f[i<span class="number">-1</span>][j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/20/acwing-%E8%AE%B0%E5%BD%95%20%E7%AC%AC%E4%B8%80%E7%AB%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/acwing/" rel="tag">acwing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/" rel="tag">dp</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/04/22/codeforces-round-636-div-2%E5%9B%9E%E9%A1%BE/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            codeforces round 636 div.2回顾
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">基本数据结构 KMP模式匹配</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'CrGfMA98kazfGrf6Xmn3fTS9-gzGzoHsz',
+        app_key: 'EXX5eepn334CGhRO3yHKyJfY',
+        path: window.location.pathname,
+        notify: 'true',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊~~~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> softmountain
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.jpeg" alt="收集瓶"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/zhifubao.png">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/weixin.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['记录下时光流逝的足迹', '弱小无知不是生存的障碍，傲慢才是', '记忆繁杂飘零，我采撷几枚碎片于此'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=448982262&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>
