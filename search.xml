@@ -245,25 +245,6 @@
       </tags>
   </entry>
   <entry>
-    <title>单调栈问题：寻找最大矩形面积</title>
-    <url>/2020/04/12/%E5%8D%95%E8%B0%83%E6%A0%88%E9%97%AE%E9%A2%98%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF/</url>
-    <content><![CDATA[<p> 题意：求若干个相邻矩形并集内部所能找到的最大矩形面积</p>
-<a id="more"></a>
-
-<p>链接：<a href="http://poj.org/problem?id=2559" target="_blank" rel="noopener">POJ2559</a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[n+<span class="number">1</span>]=p=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(a[i]&gt;s[p])</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> <span class="built_in">width</span>=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(s[p]&gt;a[i])&#123;		</span><br><span class="line">			<span class="built_in">width</span>+=w[p];</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">width</span>*s[p]);</span><br><span class="line">            p--;</span><br><span class="line">        &#125;</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="built_in">width</span>+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>同余</title>
     <url>/2020/04/13/%E5%90%8C%E4%BD%99/</url>
     <content><![CDATA[<p>最近一次的周赛中暴露了同余逆元的短板，连板子都不会用，哎，只能加紧补了</p>
@@ -410,5 +391,55 @@
       <tags>
         <tag>图论</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>单调栈问题：寻找最大矩形面积</title>
+    <url>/2020/04/12/%E5%8D%95%E8%B0%83%E5%A0%86%E5%92%8C%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p> 单调堆和队列可以对分析进行优化</p>
+<a id="more"></a>
+
+<h2 id="单调堆："><a href="#单调堆：" class="headerlink" title="单调堆："></a>单调堆：</h2><p>链接：<a href="http://poj.org/problem?id=2559" target="_blank" rel="noopener">POJ2559</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[n+<span class="number">1</span>]=p=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(a[i]&gt;s[p])</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> <span class="built_in">width</span>=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(s[p]&gt;a[i])&#123;		</span><br><span class="line">			<span class="built_in">width</span>+=w[p];</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">width</span>*s[p]);</span><br><span class="line">            p--;</span><br><span class="line">        &#125;</span><br><span class="line">        s[++p]=a[i],w[p]=<span class="built_in">width</span>+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>最大子序和：给定一个长为N的整数序列，求找到一段不超过M的连续子序列，使得子序列中的所有数的和为最大值。N,M&lt;+3*10^5</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>我们思考一下，对于任意一个点i,以它结尾的子序列的的首位j一定存在如下情况：在不超过i的前置位M的情况下，s[j]一定是最小的，直到i右移，有新的单元s[i]加入能够替换s[j]或者超过最大限度M不得不换更右边的数字.</p>
+<p>这里我们得用到单调递减序列，最优选择的序列集合一定是“下标位置递增，对应的前缀和的值也递增的”序列。我们这里使用一个一队列来保存这个序列。</p>
+<p>操作如下：</p>
+<ol>
+<li>判断队头决策与i的距离是否超出M的范围，若超出则出队</li>
+<li>此时对头就是右端点为i时，左端点的最优选择</li>
+<li>不断删除队尾决策，直到队尾对应的S值小于等于s[i] 。然后把i作为一个新决策入队</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> l=<span class="number">1</span>,r=<span class="number">1</span>;</span><br><span class="line">q[<span class="number">1</span>]=<span class="number">0</span>; <span class="comment">//初始化在首位</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;=r&amp;&amp;q[l]&lt;i-m)	l++;</span><br><span class="line">    ans=<span class="built_in">max</span>(ans,sum[i]-sum[q[l]]);</span><br><span class="line">    <span class="keyword">while</span>(l&lt;=r&amp;&amp;sum[q[r]]&gt;=sum[i])	r--;</span><br><span class="line">    <span class="comment">//如果s[i]最小，相当于清空了队列。。</span></span><br><span class="line">    q[++r]=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（图论初学）单源最短路径：dijkstra</title>
+    <url>/2020/04/04/%EF%BC%88%E5%9B%BE%E8%AE%BA%E5%88%9D%E5%AD%A6%EF%BC%89%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%9Adijkstra/</url>
+    <content><![CDATA[<p>目标：寻找起始点到目标点的最短路径，做法，每次扫描最短出边，加入路径。。。</p>
+<a id="more"></a>
+
+<ol>
+<li>初始化d[1]=0,然后将其余的dist全部设置为最大</li>
+<li>进行n-1次循环，每次都找最小了dist[x],将x标记</li>
+<li>扫描该x的全部出边（x,y,z）,ifd[y]&gt;d[x]+z),更新d[y] </li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">105</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> d[maxn],a[maxn][maxn],v[maxn],ans,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(v,<span class="number">0</span>,<span class="keyword">sizeof</span> v);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> x=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!v[j]&amp;&amp;(x==<span class="number">0</span>||d[j]&lt;d[x]))	x=j;</span><br><span class="line">		&#125;</span><br><span class="line">		v[x]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">			d[j]=<span class="built_in">min</span>(d[j],d[x]+a[x][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;m;</span><br><span class="line">	<span class="built_in">string</span> s;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		a[i][i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;j++)&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;s;</span><br><span class="line">			<span class="keyword">if</span>(s==<span class="string">"x"</span>)&#123;</span><br><span class="line">				a[i][j]=a[j][i]=INF;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;s.<span class="built_in">size</span>();k++)&#123;</span><br><span class="line">					n=n*<span class="number">10</span>+s[k]-<span class="string">'0'</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				a[i][j]=a[j][i]=n;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		d[i]=INF;</span><br><span class="line">	&#125;</span><br><span class="line">	d[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">	search();</span><br><span class="line">	ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(d[i],ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度O(n^2)…适用于求单源路径…<br>最优序列方法，之后更新…</p>
+<p>categrories: </p>
+<ul>
+<li>ACM</li>
+</ul>
+]]></content>
   </entry>
 </search>
