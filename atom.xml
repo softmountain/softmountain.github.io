@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-22T12:55:15.703Z</updated>
+  <updated>2020-05-04T09:24:32.837Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二叉查找树和平衡树初步</title>
+    <link href="http://yoursite.com/2020/05/04/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%E5%92%8C%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%88%9D%E6%AD%A5/"/>
+    <id>http://yoursite.com/2020/05/04/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%E5%92%8C%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%88%9D%E6%AD%A5/</id>
+    <published>2020-05-04T03:56:30.000Z</published>
+    <updated>2020-05-04T09:24:32.837Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 终于划水划到平衡树了，学完了就先去做题，不强看书了,囫囵吞枣的学法难受且不实在，我是勤劳的进阶指南搬运工&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线段树&amp;树状数组初学</title>
+    <link href="http://yoursite.com/2020/05/02/%E7%BA%BF%E6%AE%B5%E6%A0%91&amp;%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%88%9D%E5%AD%A6/"/>
+    <id>http://yoursite.com/2020/05/02/%E7%BA%BF%E6%AE%B5%E6%A0%91&amp;%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%88%9D%E5%AD%A6/</id>
+    <published>2020-05-02T11:58:08.000Z</published>
+    <updated>2020-05-04T01:29:12.064Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;鼓捣了三天才勉强算是入个门，这里就算是借大佬们的代码来给自己加深一下理解吧&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>codeforces round 636 div.2回顾</title>
