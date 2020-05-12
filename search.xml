@@ -566,4 +566,16 @@
         <tag>图论</tag>
       </tags>
   </entry>
+  <entry>
+    <title>可持续化数据结构</title>
+    <url>/2020/05/07/%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8C%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>便于得知数据集过去状态的一种方式，假设存在m次变化，当我们想知道过去的所有情况下的变化时，可以将数据结构拷贝一份，多耗费m倍空间</p>
+]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
 </search>
