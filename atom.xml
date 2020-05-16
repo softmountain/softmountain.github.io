@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-07T11:59:11.077Z</updated>
+  <updated>2020-05-16T10:56:53.345Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>codeforces round 641&amp;&amp;642 回顾</title>
+    <link href="http://yoursite.com/2020/05/16/codeforces-round-641-642-%E5%9B%9E%E9%A1%BE/"/>
+    <id>http://yoursite.com/2020/05/16/codeforces-round-641-642-%E5%9B%9E%E9%A1%BE/</id>
+    <published>2020-05-16T02:10:20.000Z</published>
+    <updated>2020-05-16T10:56:53.345Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;又到周末了，把最近打的cf没补的题目在假期补了，顺带水一发博客，感觉最近的cf没以前这么难了？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ACM" scheme="http://yoursite.com/categories/ACM/"/>
+    
+    
+      <category term="codeforces" scheme="http://yoursite.com/tags/codeforces/"/>
+    
+  </entry>
   
   <entry>
     <title>可持续化数据结构</title>
