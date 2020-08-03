@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    基本数据结构 KMP模式匹配 |  收集瓶
+    acwing 记录 第一章 |  收集瓶
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -44,7 +44,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-基本数据结构-KMP模式匹配" class="article article-type-post" itemscope
+  <article id="post-acwing-257-关押罪犯" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -52,7 +52,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  基本数据结构 KMP模式匹配
+  acwing 记录 第一章
 </h1>
  
 
@@ -61,8 +61,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/" class="article-date">
-  <time datetime="2020-04-17T07:29:44.000Z" itemprop="datePublished">2020-04-17</time>
+      <a href="/2020/04/20/acwing-257-%E5%85%B3%E6%8A%BC%E7%BD%AA%E7%8A%AF/" class="article-date">
+  <time datetime="2020-04-20T09:24:59.000Z" itemprop="datePublished">2020-04-20</time>
 </a>
       
   <div class="article-category">
@@ -76,7 +76,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">588</span>
+            <span class="post-count">624</span>
         </span>
     </span>
 
@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -110,26 +110,15 @@
       
 
       
-      <p>KMP匹配是判断两个线性表之间是否存在子母串关系的算法，并且能够定位到子串所处的位置</p>
+      <p> 这一题虽然看上去像是二分图，但是实际上可以用并查集贪心出来，变得更加简单了</p>
 <a id="more"></a>
 
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1 .首先对小的字符串A进行自我”匹配”，设置next数组，其中next[i]表示“A中以a[i]结尾的非前缀子串”与”A的前缀”所能匹配到的最大长度</p>
-<p>公式： next[i]=max{j},其中j&lt;i并且A[i-j+1 ~ i]==A[1 ~ j]</p>
-<p>特别的：当不存在这样的 j 时，令next[i]=0</p>
-<p>2 .对字符串A和B进行匹配，求出一个数组f，其中f[i]表示“B中以i结尾的字串”与”A的前缀”能够匹配到的最大长度</p>
-<p>公式： f[i]=max{j},其中j&lt;i并且B[i-j+1 ~i]==A[1 ~ j]</p>
-<p>当j的长度超过了n时，应该把j=next[j];</p>
-<h3 id="引理"><a href="#引理" class="headerlink" title="引理"></a>引理</h3><p>对于j&lt;i,则j是next[i]的一个候选项，则小于j的next[i]的最大候选项是next[j],这是一个套娃的关系，直到满足条件或者next[j]==0</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//next数组的求法</span></span><br><span class="line">next[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">    <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;a[i]!=a[j+<span class="number">1</span>]) j=next[j];</span><br><span class="line">    <span class="comment">//找到符合条件的j,或者j==0;</span></span><br><span class="line">    <span class="keyword">if</span>(a[i]==a[j+<span class="number">1</span>]) j++; </span><br><span class="line">    <span class="comment">//如果符合条件，加上末尾的元素</span></span><br><span class="line">    next[i]=j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//f数组的求法（大同小异）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)&#123;</span><br><span class="line">    <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;(j==n||b[i]!=a[j+<span class="number">1</span>])) j=next[j];</span><br><span class="line">    <span class="keyword">if</span>(b[i]==a[j+<span class="number">1</span>]) j++;</span><br><span class="line">	f[i]=j;</span><br><span class="line">    <span class="comment">//当f[i]==n的时候，说明子串就出现了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二分图解法，复杂度O-logN-N-M"><a href="#二分图解法，复杂度O-logN-N-M" class="headerlink" title="二分图解法，复杂度O(logN*(N+M))"></a>二分图解法，复杂度O(logN*(N+M))</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">20010</span>,M=<span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> ne[M],he[N],w[M],ed[M],tot;</span><br><span class="line"><span class="keyword">int</span> color[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span>&#123;</span><br><span class="line">	ne[tot]=he[x],ed[tot]=y,w[tot]=z,he[x]=tot++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> c,<span class="keyword">int</span> limit)</span></span>&#123;</span><br><span class="line">	color[x]=c;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=he[x];~i;i=ne[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(w[i]&lt;=limit)</span><br><span class="line">		<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> y=ed[i];</span><br><span class="line">		<span class="keyword">if</span>(color[y])&#123;</span><br><span class="line">			<span class="keyword">if</span>(color[y]==c)	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(!dfs(y,<span class="number">3</span>-c,limit))	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> limit)</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(color,<span class="number">0</span>,<span class="keyword">sizeof</span> color);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="keyword">if</span>(color[i]==<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">if</span>(!dfs(i,<span class="number">1</span>,limit))</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	 <span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="built_in">memset</span>(he,<span class="number">-1</span>,<span class="keyword">sizeof</span> he);</span><br><span class="line">	<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">		<span class="keyword">int</span> x,y,z;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;z);</span><br><span class="line">		add(x,y,z);</span><br><span class="line">		add(y,x,z);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> l=<span class="number">0</span>,r=<span class="number">1e9</span>;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">		<span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(mid))	r=mid;</span><br><span class="line">		<span class="keyword">else</span>	l=mid+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>链接：<a href="http://poj.org/problem?id=2559" target="_blank" rel="noopener">POJ1961</a></p>
-<p>题意：求循环元，首先我们设s[1~i]拥有长度为len的循环元</p>
-<p>那么len必定满足以下条件：</p>
-<p>len|i &amp;&amp; s[len+1<del>i]==s[1</del>i-len]</p>
-<p>而最小循环节则满足</p>
-<p>s[len] (最小循环节)=next[i]</p>
-<p>综上，得到代码</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calc_next</span><span class="params">()</span></span>&#123;</span><br><span class="line">    next[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;j=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;a[j+<span class="number">1</span>]!=a[i]) j=next[j];</span><br><span class="line">        <span class="keyword">if</span>(a[j+<span class="number">1</span>]==a[i]) j++;</span><br><span class="line">        next[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,a+<span class="number">1</span>);</span><br><span class="line">        calc_next();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"Test case"</span>&lt;&lt;++T&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i%(i-next[i])==<span class="number">0</span>&amp;&amp;i/(i-next[i])&gt;<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;i/(i-next[i])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="并查集-贪心"><a href="#并查集-贪心" class="headerlink" title="并查集+贪心"></a>并查集+贪心</h4><p>思路：我们设置两倍的并查集数量，然后将所有的边按照权值由大到小排序，开始遍历，开始时我们遇到边，将他们之间的fa[x]等于对方的find(ed.c+n)，意思就是我们将这两个人放到不同的监狱去避免他们爆发冲突，但是如果我们发现这两个人之前就已经被分配到了相同的地方(可能存在有相同的仇人)，出于怒气值最小那么就不能把他们分开了，他们的边权就是我们要找的值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100100</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> n,m,fa[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> a,b,c;</span><br><span class="line">&#125; e[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.c&gt;b.c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">find</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x==fa[x]?x:fa[x]=<span class="built_in">find</span>(fa[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;e[i].a&gt;&gt;e[i].b&gt;&gt;e[i].c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">1</span>; i&lt;=(n&lt;&lt;<span class="number">1</span>); i++)</span><br><span class="line">        fa[i]=i;</span><br><span class="line">    sort(e+<span class="number">1</span>,e+m+<span class="number">1</span>,cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x=<span class="built_in">find</span>(e[i].a);</span><br><span class="line">        <span class="keyword">int</span> y=<span class="built_in">find</span>(e[i].b);</span><br><span class="line">        <span class="keyword">if</span>(x==y)<span class="comment">//在同一个集合</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;e[i].c;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        fa[y]=<span class="built_in">find</span>(e[i].a+n);<span class="comment">//加入到下一个集合</span></span><br><span class="line">        fa[x]=<span class="built_in">find</span>(e[i].b+n);<span class="comment">//加入到下一个集合</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
       <!-- reward -->
       
@@ -197,14 +186,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/20/acwing-257-%E5%85%B3%E6%8A%BC%E7%BD%AA%E7%8A%AF/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/acwing/" rel="tag">acwing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
 
 
     </footer>
@@ -215,7 +204,7 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/04/20/acwing-257-%E5%85%B3%E6%8A%BC%E7%BD%AA%E7%8A%AF/" class="article-nav-link">
+      <a href="/2020/04/20/acwing-%E8%AE%B0%E5%BD%95%20%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
@@ -225,9 +214,9 @@
       </a>
     
     
-      <a href="/2020/04/15/codeforces-round-633-div-2-round-634-div-3%20round%20635%20div.2%E5%9B%9E%E9%A1%BE/" class="article-nav-link">
+      <a href="/2020/04/17/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-KMP%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">codeforces round 633 div.2&amp;&amp; round 634 div.3回顾</div>
+        <div class="article-nav-title">基本数据结构 KMP模式匹配</div>
       </a>
     
   </nav>
